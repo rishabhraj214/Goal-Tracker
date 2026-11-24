@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishabh Goal Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">R</div>
+            <div>
+                <h2>Rishabh</h2>
+                <span>GOAL TRACKER</span>
+            </div>
+        </div>
+
+        <p class="menu-title">MENU</p>
+
+        <nav>
+            <button class="nav-btn active" data-page="dashboard">⌂ Dashboard</button>
+            <button class="nav-btn" data-page="daily">☑ Daily Tasks</button>
+            <button class="nav-btn" data-page="monthly">▦ Monthly Goals</button>
+            <button class="nav-btn" data-page="yearly">◎ Yearly Goals</button>
+            <button class="nav-btn" data-page="analytics">▥ Analytics</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="quote">
+                <span>✦ Daily Reminder</span>
+                <p>"Small steps every day lead to big results."</p>
+            </div>
+            <p class="copyright">© 2026 Rishabh Goal Tracker</p>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <span class="date-label" id="todayDate"></span>
+                <h2 id="pageTitle">Dashboard</h2>
+            </div>
+            <div class="profile">
+                <div class="avatar">R</div>
+                <div>
+                    <strong>Rishabh Raj</strong>
+                    <span>Personal Workspace</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section class="page active" id="dashboard">
+
+            <div class="welcome">
+                <div>
+                    <span class="welcome-tag">YOUR PERSONAL SPACE</span>
+                    <h1>Hello, Rishabh! 👋</h1>
+                    <p>Make today count. Every small step matters.</p>
+                </div>
+                <div class="welcome-icon">🚀</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card purple">
+                    <span>Today's Tasks</span>
+                    <h2 id="dashDaily">0/0</h2>
+                    <p>Tasks completed</p>
+                    <div class="stat-icon">☑</div>
+                </div>
+
+                <div class="stat-card blue">
+                    <span>Monthly Goals</span>
+                    <h2 id="dashMonthly">0%</h2>
+                    <p>Current month progress</p>
+                    <div class="stat-icon">▦</div>
+                </div>
+
+                <div class="stat-card pink">
+                    <span>Yearly Goals</span>
+                    <h2 id="dashYearly">0%</h2>
+                    <p>Current year progress</p>
+                    <div class="stat-icon">◎</div>
+                </div>
+
+                <div class="stat-card orange">
+                    <span>Current Streak</span>
+                    <h2 id="dashStreak">0 🔥</h2>
+                    <p>Consecutive active days</p>
+                    <div class="stat-icon">⚡</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Today's Tasks</h3>
+                            <p>Your daily checklist</p>
+                        </div>
+                        <button class="small-btn" onclick="showPage('daily')">View All →</button>
+                    </div>
+                    <div id="dashboardTasks"></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Overall Progress</h3>
+                            <p>Your goal completion</p>
+                        </div>
+                    </div>
+                    <div class="overall-progress">
+                        <div class="progress-circle" id="overallCircle">
+                            <div>
+                                <h2 id="overallPercent">0%</h2>
+                                <span>Completed</span>
+                            </div>
+                        </div>
+                        <p id="overallText">Start adding your goals!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>My Goal Overview</h3>
+                        <p>Track your bigger ambitions</p>
+                    </div>
+                </div>
+                <div id="dashboardGoals" class="goal-overview"></div>
+            </div>
+        </section>
+
+        <!-- DAILY TASKS -->
+        <section class="page" id="daily">
+            <div class="section-heading">
+                <div>
+                    <h1>Daily Tasks ☑</h1>
+                    <p>Plan your day and complete your tasks.</p>
+                </div>
+                <div class="today-chip" id="dailyDate"></div>
+            </div>
+
+            <div class="panel">
+                <h3>Add New Task</h3>
+                <form id="taskForm" class="add-form">
+                    <input type="text" id="taskInput" placeholder="What do you want to do today?" required>
+                    <button type="submit">+ Add Task</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Your Checklist</h3>
+                        <p id="taskCount">0 tasks</p>
+                    </div>
+                    <span class="percentage" id="dailyPercent">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="dailyBar"></div>
+                </div>
+                <div id="taskList" class="task-list"></div>
+            </div>
+        </section>
+
+        <!-- MONTHLY GOALS -->
+        <section class="page" id="monthly">
+            <div class="section-heading">
+                <div>
+                    <h1>Monthly Goals ▦</h1>
+                    <p>Focus on what you want to achieve this month.</p>
+                </div>
+                <div class="today-chip" id="monthLabel"></div>
+            </div>
+
+            <div class="panel">
+                <h3>Create Monthly Goal</h3>
+                <form id="monthlyForm" class="goal-form">
+                    <input type="text" id="monthlyInput" placeholder="Enter your monthly goal..." required>
+                    <input type="date" id="monthlyDeadline">
+                    <button type="submit">+ Add Goal</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Monthly Target List</h3>
+                        <p>Mark your goals when completed.</p>
+                    </div>
+                    <span class="percentage" id="monthlyPercent">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="monthlyBar"></div>
+                </div>
+                <div id="monthlyList" class="goal-list"></div>
+            </div>
+        </section>
+
+        <!-- YEARLY GOALS -->
+        <section class="page" id="yearly">
+            <div class="section-heading">
+                <div>
+                    <h1>Yearly Goals ◎</h1>
+                    <p>Think bigger. Work consistently. Achieve more.</p>
+                </div>
+                <div class="today-chip" id="yearLabel"></div>
+            </div>
+
+            <div class="panel">
+                <h3>Create Yearly Goal</h3>
+                <form id="yearlyForm" class="goal-form">
+                    <input type="text" id="yearlyInput" placeholder="Enter your yearly goal..." required>
+                    <input type="date" id="yearlyDeadline">
+                    <button type="submit">+ Add Goal</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>My Yearly Targets</h3>
+                        <p>Your big achievements for this year.</p>
+                    </div>
+                    <span class="percentage" id="yearlyPercent">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="yearlyBar"></div>
+                </div>
+                <div id="yearlyList" class="goal-list"></div>
+            </div>
+        </section>
+
+        <!-- ANALYTICS -->
+        <section class="page" id="analytics">
+            <div class="section-heading">
+                <div>
+                    <h1>Progress Analytics 📊</h1>
+                    <p>See how far you have come.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card purple">
+                    <span>Total Tasks</span>
+                    <h2 id="totalTasks">0</h2>
+                    <p>All daily tasks</p>
+                </div>
+                <div class="stat-card blue">
+                    <span>Completed Tasks</span>
+                    <h2 id="completedTasks">0</h2>
+                    <p>Tasks finished</p>
+                </div>
+                <div class="stat-card pink">
+                    <span>Total Goals</span>
+                    <h2 id="totalGoals">0</h2>
+                    <p>Monthly + Yearly</p>
+                </div>
+                <div class="stat-card orange">
+                    <span>Goals Achieved</span>
+                    <h2 id="completedGoals">0</h2>
+                    <p>Targets completed</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Goal Completion Summary</h3>
+                <div id="analyticsSummary" class="analytics-summary"></div>
+            </div>
+
+            <div class="panel">
+                <h3>Recent Activity</h3>
+                <div id="activityList"></div>
+            </div>
+        </section>
+
+        <footer>
+            Made with ❤️ by Rishabh Raj
+        </footer>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
